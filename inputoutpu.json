@@ -1,0 +1,92 @@
+{
+    "device-name": Cart App",
+    "device-type": Cart
+    "buffers-count": 2,
+    "input-buffers":{
+        "1":{
+            "token-delimitators": "",
+            "protocol": "HTTP",
+            "prefix": "curl -X POST http://localhost:9080/'",
+            "buffer-tokens":[
+            {
+                "name":"Cart options",
+                "description":"",
+                "token-type":"string", 
+                "byte-size":10, 
+                "regex-rule": "[a-zA-Z]*", // Correct inputs will be: [settings]
+                "optional": false
+            },
+            {
+                "name":"Cart option parameter key",
+                "description": "Parameter key for the setting chosen",
+                "token-type":"string",
+                "byte-size":10,
+                "regex-rule": "[a-zA-Z]*", // Correct inputs will be: [money]
+                "optional": false
+            },
+            {
+                "name":"Microwave option parameter value",
+                "description": "Parameter value for the setting chosen",
+                "token-type":"string",
+                "byte-size":10,
+                "regex-rule": "[+-]?([0-9]*[.])?[0-9]+", // Correct inputs will be a number
+                "optional": false
+            }
+            ]
+        }
+	"2":{
+            "token-delimitators": "",
+            "protocol": "HTTP",
+            "prefix": "curl -X POST -H "Content-Type: application/json" -d'",
+            "buffer-tokens":[
+            {
+                "name":"Products in cart",
+                "description":"",
+                "token-type":"string",  // Correct inputs a json '{"name":"produs1", "value":27, "rating":28, "x":3, "y":3, "z":3}'
+                "byte-size":10, 
+                "optional": false
+            }
+            ]
+        }
+    },
+    "output-buffers":{
+        "1":{
+            "token-delimitators": "",
+            "protocol": "HTTP",
+            "prefix": "curl -X GET http://localhost:9080/'",
+            "buffer-tokens":[
+            {
+                "name":"Cart options",
+                "description":"",
+                "token-type":"string", 
+                "byte-size":10, 
+                "regex-rule": "[a-zA-Z]*", // Correct inputs will be: [settings]
+                "optional": false
+            },
+            {
+                "name":"Cart options parameter",
+                "description": "Parameters for the setting chosen",
+                "token-type":"string",
+                "byte-size":10,
+                "regex-rule": "[a-zA-Z]*", // Correct inputs will be: [money]
+                "optional": true
+            }
+            ]
+        }
+	 "2":{
+            "token-delimitators": "",
+            "protocol": "HTTP",
+            "prefix": "curl -X GET http://localhost:9080'",
+            "buffer-tokens":[
+            {
+                "name":"Products",
+                "description":"",
+                "token-type":"string", 
+                "byte-size":10, 
+                "regex-rule": "[a-zA-Z]*", // Correct inputs will be: [products]
+                "optional": false
+            }
+            ]
+        }
+    }
+}
